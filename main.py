@@ -5,8 +5,11 @@
 @Input: The input file is a text file with the following format: each line is a clause, and each number is a literal.
 @Output: The output is a text file with the following format: the first line is the number of variables, and the second line is the assignment of the variables.
 """
+import sys
+
 from satSolver import read_file, solve
 
 if __name__ == '__main__':
-    clauses = read_file("clauses.txt")
+    args = sys.argv[1:]
+    clauses = read_file(args[0])
     print(solve(clauses))
