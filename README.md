@@ -13,20 +13,18 @@
 **Note :** *The text file must be in the following format : each line is a clause, and each number is a literal.*
 
 **Example :**
-    
-    ```
+
     -1 2 3 -5 -4
     -2
     1 2 4
     -2 3
     2 5
     3 -4
-    ```
+    
 
 **Output :** *The output is a list of literals that satisfies the formula, or "None" if no solution exists.*
 
 **Example :**
-    
     ```
     [-2, 5, 3, 1]
     ```
