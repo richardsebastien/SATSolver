@@ -22,3 +22,18 @@
     2 5
     3 -4
     ```
+
+**Output :** *The output is a list of literals that satisfies the formula, or "None" if no solution exists.*
+
+**Example :**
+    
+    ```
+    [-2, 5, 3, 1]
+    ```
+
+**Credits :** *This project was developed by Sébastien RICHARD, a student at the University of Toulon.*
+
+**License :** *This project is under the MIT license.*
+
+**Contact :** *For any questions or suggestions, please contact me at sebastien-richard3@etud.univ-tln.fr*
+
