@@ -6,9 +6,10 @@ def read_file(file):
     with open(file, 'r') as f:
         lines = f.readlines()
         for line in lines:
-            clause =[int(x) for x in line.split()]
+            clause = [int(x) for x in line.split()]
             clauses.append(clause)
     return clauses
+
 
 def find_unit(clauses):
     """
@@ -29,6 +30,7 @@ def remove_clause(clauses, unit):
             new_clauses.append(clause)
     return new_clauses
 
+
 def remove_opposite(clauses, unit):
     """
     This function removes the opposite of the unit clause from the list of clauses.
@@ -45,6 +47,7 @@ def remove_opposite(clauses, unit):
             new_clauses.append(new_clause)
     return new_clauses
 
+
 def find_pure(clauses):
     """
     This function finds a pure literal in the list of clauses.
@@ -60,6 +63,7 @@ def find_pure(clauses):
             pure.append(literal)
     return pure
 
+
 def solve(clauses):
     """
     This function solves the SAT problem.
@@ -67,7 +71,6 @@ def solve(clauses):
     assignment = []
     while len(clauses) > 0:
         unit = find_unit(clauses)
-        print(clauses,unit)
         if unit:
             clauses = remove_clause(clauses, unit)
             clauses = remove_opposite(clauses, unit)
