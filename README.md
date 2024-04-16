@@ -8,7 +8,7 @@
 
 **Utilisation :** *To use this solver, simply run the script `main.py` passing the path of the text file containing the SAT formula as an argument.*
 
-**Example :** `python3 main.py test.txt`
+**Example :** `python3 main.py clauses.txt`
 
 **Note :** *The text file must be in the following format : each line is a clause, and each number is a literal.*
 

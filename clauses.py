@@ -15,5 +15,3 @@ def generate_clauses(filename, num_vars, num_clauses):
                 clause.append(literal)
             f.write(' '.join(map(str, clause)) + '\n')
     f.close()
-
-generate_clauses("testgenerate.txt", 1000, 300)
