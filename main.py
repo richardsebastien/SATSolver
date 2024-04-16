@@ -10,11 +10,13 @@ and the second line is the assignment of the variables.
 import sys
 
 from satSolver import read_file, dpll
+from clauses import generate_clauses
 
 if __name__ == '__main__':
+    generate_clauses("testgenerate.txt", 1000, 4000)
     args = sys.argv[1:]
     clauses = read_file(args[0])
-    res, assignment = dpll(clauses, [],[])
+    res, assignment = dpll(clauses, [], [])
     if res:
         print("This SAT problem is satisfiable.")
         print("The assignment of the variables is:")

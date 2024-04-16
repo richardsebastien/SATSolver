@@ -84,28 +84,28 @@ def dpll(clauses, assignment, history):
 
     unit = find_unit(clauses)
     if unit:
-        history.append(clauses) # Save the current state by adding the current clauses to the history before
+        history.append(clauses)  # Save the current state by adding the current clauses to the history before
         # modifying them
         new_clauses = remove_clause(clauses, unit)
         new_clauses = remove_opposite(new_clauses, unit)
-        return dpll(new_clauses, assignment + [unit],history)
+        return dpll(new_clauses, assignment + [unit], history)
 
     pure = find_pure(clauses)
     if pure:
-        history.append(clauses) # Save the current state
+        history.append(clauses)  # Save the current state
         new_clauses = remove_clause(clauses, pure[0])
         new_clauses = remove_opposite(new_clauses, pure[0])
-        return dpll(new_clauses, assignment + [pure[0]],history)
+        return dpll(new_clauses, assignment + [pure[0]], history)
 
     literal = min(clauses, key=len)[0]  # Literal with the smallest clause
 
-    history.append(clauses) # Save the current state
+    history.append(clauses)  # Save the current state
     new_clauses = add_clause(clauses, [literal])  # Union of the clauses with the literal
-    res, new_assignment = dpll(new_clauses, assignment + [literal],history)
+    res, new_assignment = dpll(new_clauses, assignment + [literal], history)
     if res:
         return res, new_assignment
 
-    clauses = history.pop() # Backtrack
+    clauses = history.pop()  # Backtrack
     new_clauses = remove_clause(clauses, literal)
     new_clauses = add_clause(new_clauses, [-literal])  # Union of the clauses with the negation of the literal
-    return dpll(new_clauses, assignment + [-literal],history)
+    return dpll(new_clauses, assignment + [-literal], history)
