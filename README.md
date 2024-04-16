@@ -22,14 +22,14 @@
     3 -4
     
 
-**Output :** *The output is a list of literals that satisfies the formula, or "None" if no solution exists.*
+**Output :** *The output is an answer if it satisfiable or not and if it is satisfiable an instantiation comes with.*
 
 **Example :**
     ```
     [-2, 5, 3, 1]
     ```
 
-**Credits :** *This project was developed by Sébastien RICHARD, a student at the University of Toulon.*
+**Credits :** *This project is developed by Sébastien RICHARD, a student at the University of Toulon.*
 
 **License :** *This project is under the MIT license.*
 
