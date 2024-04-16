@@ -7,9 +7,9 @@
 """
 import sys
 
-from satSolver import read_file, solve
+from satSolver import read_file, dpll
 
 if __name__ == '__main__':
     args = sys.argv[1:]
     clauses = read_file(args[0])
-    print(solve(clauses))
+    print(dpll(clauses))
