@@ -63,6 +63,7 @@ def find_pure(clauses):
             pure.append(literal)
     return pure
 
+
 def add_clause(clauses, clause):
     """
     This function adds a clause to the list of clauses.
@@ -72,35 +73,34 @@ def add_clause(clauses, clause):
     return new_clauses
 
 
-def dpll(clauses):
+def dpll(clauses,assignment):
     """
     This function implements the DPLL algorithm to solve the SAT problem.
     """
-    print(clauses)
     if not clauses:
-        return True, []
+        return True, assignment
     if [] in clauses:
         return False, []
 
     unit = find_unit(clauses)
     if unit:
-        print("unit", unit)
         new_clauses = remove_clause(clauses, unit)
         new_clauses = remove_opposite(new_clauses, unit)
-        return dpll(new_clauses)
+        return dpll(new_clauses,assignment + [unit])
 
     pure = find_pure(clauses)
     if pure:
-        print("pure", pure[0])
         new_clauses = remove_clause(clauses, pure[0])
         new_clauses = remove_opposite(new_clauses, pure[0])
-        return dpll(new_clauses)
+        return dpll(new_clauses,assignment + [pure[0]])
 
     literal = min(clauses, key=len)[0]  #Litteral with the smallest clause
-    print("literal", literal)
-    new_clauses = add_clause(clauses, [literal]) #Union of the clauses with the literal
-    dpll(new_clauses)
+
+    new_clauses = add_clause(clauses, [literal])  #Union of the clauses with the literal
+    res, new_assignment = dpll(new_clauses,assignment + [literal])
+    if res:
+        return res, new_assignment
+
     new_clauses = remove_clause(clauses, literal)
-    new_clauses = add_clause(new_clauses, [-literal]) #Union of the clauses with the negation of the literal
-    dpll(new_clauses)
-    return False, []
+    new_clauses = add_clause(new_clauses, [-literal])  #Union of the clauses with the negation of the literal
+    return dpll(new_clauses,assignment + [-literal])
