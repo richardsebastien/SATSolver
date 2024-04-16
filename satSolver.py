@@ -84,7 +84,7 @@ def dpll(clauses, assignment, history):
 
     unit = find_unit(clauses)
     if unit:
-        history.append(clauses)  # Save the current state by adding the current clauses to the history before
+        history.append(unit)  # Save the current state by adding the current clauses to the history before
         # modifying them
         new_clauses = remove_clause(clauses, unit)
         new_clauses = remove_opposite(new_clauses, unit)
@@ -92,7 +92,7 @@ def dpll(clauses, assignment, history):
 
     pure = find_pure(clauses)
     if pure:
-        history.append(clauses)  # Save the current state
+        history.append(pure)  # Save the current state
         new_clauses = remove_clause(clauses, pure[0])
         new_clauses = remove_opposite(new_clauses, pure[0])
         return dpll(new_clauses, assignment + [pure[0]], history)

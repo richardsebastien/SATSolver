@@ -8,9 +8,12 @@ def generate_clauses(filename, num_vars, num_clauses):
     with open(filename, 'w') as f:
         for i in range(num_clauses):
             clause = []
-            for j in range(num_vars):
+            for j in range(random.randint(1, num_vars)):
+                literal = random.randint(1, num_vars)
                 if random.randint(0, 1):
-                    clause.append(j + 1)
-                else:
-                    clause.append(-(j + 1))
+                    literal = -literal
+                clause.append(literal)
             f.write(' '.join(map(str, clause)) + '\n')
+    f.close()
+
+generate_clauses("testgenerate.txt", 1000, 300)
