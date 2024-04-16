@@ -10,7 +10,7 @@
 
 **Example :** `python3 main.py clauses.txt`
 
-**Note :** *The text file must be in the following format : each line is a clause, and each number is a literal.*
+**Note :** *The text file must be in the following format : each line is a clause, and each number is a literal and negative literal for non literal.*
 
 **Example :**
 
