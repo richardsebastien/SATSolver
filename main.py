@@ -14,10 +14,10 @@ from satSolver import read_file, dpll
 if __name__ == '__main__':
     args = sys.argv[1:]
     clauses = read_file(args[0])
-    res,assignment = dpll(clauses, [])
+    res, assignment = dpll(clauses, [],[])
     if res:
         print("This SAT problem is satisfiable.")
         print("The assignment of the variables is:")
-        print(list(set(assignment)))
+        print(list(set(assignment)))  # Show unique values
     else:
         print("This SAT problem is not satisfiable.")
