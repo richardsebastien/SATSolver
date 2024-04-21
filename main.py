@@ -11,14 +11,18 @@ import sys
 
 from satSolver import read_file, dpll
 from clauses import generate_clauses
+from sudoku import readSudoku, sudokuToSAT, satToSudoku, printSudoku
 
 if __name__ == '__main__':
+    sudoku = readSudoku("testsudoku.txt")
+    clauses = sudokuToSAT(sudoku)
     args = sys.argv[1:]
-    clauses = read_file(args[0])
     res, assignment = dpll(clauses, [], [])
+    solution = satToSudoku(assignment)
     if res:
         print("This SAT problem is satisfiable.")
         print("The assignment of the variables is:")
         print(list(set(assignment)))  # Show unique values
+        printSudoku(sudoku)
     else:
         print("This SAT problem is not satisfiable.")
