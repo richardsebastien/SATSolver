@@ -10,19 +10,37 @@ and the second line is the assignment of the variables.
 import sys
 
 from satSolver import read_file, dpll
-from clauses import generate_clauses
+# from clauses import generate_clauses # This import is no longer needed
 from sudoku import readSudoku, sudokuToSAT, satToSudoku, printSudoku
 
 if __name__ == '__main__':
-    sudoku = readSudoku("testsudoku.txt")
-    clauses = sudokuToSAT(sudoku)
     args = sys.argv[1:]
-    res, assignment = dpll(clauses, [], [])
-    solution = satToSudoku(assignment)
-    if res:
-        print("This SAT problem is satisfiable.")
-        print("The assignment of the variables is:")
-        print(list(set(assignment)))  # Show unique values
-        printSudoku(sudoku)
+    if args:
+        # Handle CNF file from command line
+        cnf_file_path = args[0]
+        try:
+            clauses = read_file(cnf_file_path)
+            res, assignment = dpll(clauses, [], [])
+            if res:
+                print(f"The SAT problem from {cnf_file_path} is satisfiable.")
+                print("The assignment of the variables is:")
+                print(list(set(assignment)))
+            else:
+                print(f"The SAT problem from {cnf_file_path} is not satisfiable.")
+        except FileNotFoundError:
+            print(f"Error: File not found - {cnf_file_path}")
+        except Exception as e:
+            print(f"An error occurred while processing {cnf_file_path}: {e}")
     else:
-        print("This SAT problem is not satisfiable.")
+        # Default to Sudoku solver
+        print("No CNF file provided. Solving the default Sudoku puzzle.")
+        sudoku_puzzle = readSudoku("testsudoku.txt") # Renamed to avoid conflict
+        clauses = sudokuToSAT(sudoku_puzzle)
+        res, assignment = dpll(clauses, [], [])
+        if res:
+            print("Sudoku puzzle is satisfiable.")
+            solution = satToSudoku(assignment)
+            print("The solution for the Sudoku is:")
+            printSudoku(solution)
+        else:
+            print("Sudoku puzzle is not satisfiable.")
